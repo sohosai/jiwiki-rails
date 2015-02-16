@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :pages
+  root 'welcome#index'
+
+  resources :pages, param: :slug do
+    resources :versions
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

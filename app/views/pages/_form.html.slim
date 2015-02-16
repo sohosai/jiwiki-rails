@@ -6,13 +6,13 @@
         - @page.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .field.form-group
     = f.label :slug
-    = f.text_field :slug
+    = f.text_field :slug, class: "form-control", value: SecureRandom.uuid
   .field
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: "form-control"
   .field
-    = f.label :is_deleted
-    = f.check_box :is_deleted
-  .actions = f.submit
+    = f.label :body
+    = f.text_area :body, class: "form-control", "rows" => "8"
+  .actions = f.submit class: "btn btn-primary"
