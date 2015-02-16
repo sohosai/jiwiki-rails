@@ -38,6 +38,8 @@ gem 'mongoid-slug'
 gem 'slim-rails'
 gem 'less-rails'
 
+gem 'qiita-markdown'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
