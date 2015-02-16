@@ -1,0 +1,6 @@
+- Page.all.desc(:updated_at).limit(30).each do |page|
+  .panel.panel-default
+    .panel-heading
+      .pull-right #{page.versions.count} versions, #{page.last_edited_at}
+      h4.text-left = link_to page.title, show_page_path(page)
+    .panel-body  == PagesController.rendor_mkd page.versions.last.body.split(/\r?\n/)[0,5].join("\n")

@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
+  @@mkd_processor = Qiita::Markdown::Processor.new
 
   # GET /pages
   # GET /pages.json
@@ -24,15 +25,13 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new()
-    @page.slug = page_params["slug"]
-    @page.title = page_params["title"]
+    @page = Page.new(slug: page_params["slug"], title: page_params["title"])
     new_version = Version.new(body: page_params["body"])
     new_version.save
     @page.versions << new_version
     respond_to do |format|
       if @page.save
-        format.html { redirect_to "/pages", notice: 'Page was successfully created.' }
+        format.html { redirect_to action: "show", slug: page_params[:slug] , notice: 'Page was successfully created.' }
         format.json { render :show, status: :created, location: @page }
       else
         format.html { render :new }
@@ -44,6 +43,10 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1
   # PATCH/PUT /pages/1.json
   def update
+    if page_params[:body]
+      @page.versions << Version.new(body: page_params[:body]).save
+      page_params.delete :body
+    end
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }
@@ -65,14 +68,18 @@ class PagesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_page
-      @page = Page.find_by(slug: params[:slug])
-    end
+  def self.rendor_mkd(str)
+    @@mkd_processor.call(str)[:output].to_s
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.require(:page).permit(:slug, :title, :body)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_page
+    @page = Page.find_by(slug: params[:slug])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.require(:page).permit(:slug, :title, :body)
+  end
 end

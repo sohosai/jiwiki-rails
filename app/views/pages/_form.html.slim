@@ -8,7 +8,7 @@
 
   .field.form-group
     = f.label :slug
-    = f.text_field :slug, class: "form-control", value: SecureRandom.uuid
+    = f.text_field :slug, class: "form-control", value: @page[:slug] || SecureRandom.uuid
   .field
     = f.label :title
     = f.text_field :title, class: "form-control"

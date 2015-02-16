@@ -9,7 +9,7 @@ table.table.table-striped
   tbody
     - @pages.each do |page|
       tr
-        td = link_to page.title, page_show_path(page)
+        td = link_to page.title, show_page_path(page)
         td = page.last_edited_at
 /        td = link_to 'Show', page
 /        td = link_to 'Edit', edit_page_path(page)

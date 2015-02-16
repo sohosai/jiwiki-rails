@@ -1,5 +1,6 @@
 class Page
   include Mongoid::Document
+  include Mongoid::Timestamps::Updated
   include Mongoid::Slug
 
   field :slug, type: String
@@ -11,10 +12,14 @@ class Page
 
   slug :slug
 
-  def body
-  end
+  # virtual attribute to handle create: content of page's initial version
+  attr_accessor :body
 
   def last_edited_at
     versions.last.created_at
+  end
+
+  def to_param
+    slug
   end
 end

@@ -1,13 +1,20 @@
 p#notice = notice
 
-p
-  strong Slug:
-  = @page.slug
-p
-  strong Title:
-  = @page.title
-p
-  strong Is deleted:
-  = @page.is_deleted
-
-= link_to 'Edit', edit_page_path(@page)
+.panel.panel-default
+  .panel-heading
+    .pull-right
+      = link_to "Edit", edit_page_path(@page), class: "btn btn-primary"
+    h2 = @page.title
+  .panel-body == PagesController.rendor_mkd @page.versions.last[:body]
+  table.table.table-striped
+    thead
+      tr
+        th #
+        th at
+        th body
+    tbody
+      - @page.versions.each_with_index do |version, i|
+        tr
+          td = i
+          td = version[:created_at]
+          td = link_to version[:body], version

@@ -1,3 +1,3 @@
 h1 = @version.page[:title]
 
-p = @version[:body]
+div == PagesController.rendor_mkd @version[:body]

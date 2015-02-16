@@ -10,7 +10,7 @@ html
     nav.navbar.navbar-default.navbar-static-top.navbar-collapse
       .container
         .navbar-header
-          .navbar-brand JiWiki
+           = link_to "JiWiki", root_url, class: "navbar-brand"
         .navbar-right
           nav.navbar-form.navbar-nav.nav
             == link_to "New page", "/pages/new", class: "btn btn-default"
