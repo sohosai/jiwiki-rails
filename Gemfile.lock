@@ -63,6 +63,7 @@ GEM
     erubis (2.7.0)
     escape_utils (1.0.1)
     execjs (2.3.0)
+    fast-stemmer (1.0.2)
     gemoji (2.1.0)
     github-linguist (4.4.0)
       charlock_holmes (~> 0.7.3)
@@ -107,6 +108,9 @@ GEM
     mongoid-slug (4.0.0)
       mongoid (>= 3.0)
       stringex (~> 2.0)
+    mongoid_search (0.3.2)
+      fast-stemmer (~> 1.0.0)
+      mongoid (>= 3.0.0)
     moped (2.0.3)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -245,6 +249,7 @@ DEPENDENCIES
   less-rails
   mongoid (~> 4.0.0)
   mongoid-slug
+  mongoid_search
   pry-byebug
   pry-rails
   qiita-markdown

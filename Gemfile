@@ -34,6 +34,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'mongoid', '~> 4.0.0'
 gem 'mongoid-slug'
+gem 'mongoid_search'
 
 gem 'slim-rails'
 gem 'less-rails'

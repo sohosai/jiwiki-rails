@@ -1,6 +1,7 @@
 class Version
   include Mongoid::Document
   include Mongoid::Timestamps::Created
+  include Mongoid::Search
   field :body, type: String
 
   # updated_at of Page will be updated when new version is saved
@@ -8,4 +9,6 @@ class Version
   after_save do
     touch
   end
+
+  search_in :body
 end
