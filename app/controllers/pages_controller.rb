@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   @@mkd_processor = Qiita::Markdown::Processor.new
@@ -25,7 +26,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(slug: page_params["slug"], title: page_params["title"])
+    @page = Page.new(slug: page_params["slug"], title: page_params["title"], tags: page_params["tags"])
     new_version = Version.new(body: page_params["body"])
     new_version.save
     @page.versions << new_version
@@ -49,7 +50,7 @@ class PagesController < ApplicationController
     end
     respond_to do |format|
       if @page.update(page_params)
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+        format.html { redirect_to controller: "pages", action: "show", slug: @page[:slug], notice: 'Page was successfully updated.' }
         format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit }
@@ -63,7 +64,7 @@ class PagesController < ApplicationController
   def destroy
     @page.destroy
     respond_to do |format|
-      format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to pages_path, notice: 'Page was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -80,6 +81,6 @@ class PagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def page_params
-    params.require(:page).permit(:slug, :title, :body)
+    params.require(:page).permit(:slug, :title, :body, :tags)
   end
 end

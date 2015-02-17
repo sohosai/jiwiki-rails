@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps::Updated
@@ -6,9 +7,12 @@ class Page
   field :slug, type: String
   field :title, type: String
   field :is_deleted, type: Mongoid::Boolean
+  field :tags, type: Array, default: []
 
   has_many :versions, autosave: true
+
   validates_uniqueness_of :slug
+  validates_presence_of :title
 
   slug :slug
 
@@ -20,6 +24,14 @@ class Page
   end
 
   def to_param
-    slug
+    self[:slug]
+  end
+
+  def tags=(tag)
+    if tag.is_a? String
+      super(tag.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact)
+    else
+      super(tag)
+    end
   end
 end
