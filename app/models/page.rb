@@ -29,9 +29,13 @@ class Page
 
   def tags=(tag)
     if tag.is_a? String
-      super(tag.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact)
+      super(Page.split_tags(tag))
     else
       super(tag)
     end
+  end
+
+  def self.split_tags(str)
+    str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
   end
 end

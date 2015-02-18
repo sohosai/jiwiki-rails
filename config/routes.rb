@@ -4,9 +4,13 @@ Rails.application.routes.draw do
   resources :pages, param: :slug do
     resources :versions
   end
+
+  resources :search, only: [:index, :q]
   # FIXME
   post '/pages/:page_slug/versions/new' => 'versions#create'
   patch '/pages/:page_slug/' => 'pages#update'
+
+  get '/search' => 'search#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

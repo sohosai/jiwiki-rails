@@ -1,15 +1,18 @@
-h1 Listing pages
+h1 List of pages
 
 table.table.table-striped
   thead
     tr
       th Title
+      th Tags
       th Edited at
 
   tbody
     - @pages.each do |page|
       tr
         td = link_to page.title, show_page_path(page)
+        td
+          == page.tags.map{|tag| link_to tag, "/", class: "label label-default" }.join(", ")
         td = page.last_edited_at
 /        td = link_to 'Show', page
 /        td = link_to 'Edit', edit_page_path(page)

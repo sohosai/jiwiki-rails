@@ -1,16 +1,17 @@
-p#notice = notice
+- unless notice.nil?
+  #notice.alert.alert-info = notice
 
 .panel.panel-default
   .panel-heading
     .pull-right
       = link_to "Edit", edit_page_path(@page), class: "btn btn-primary", "role" => "button"
-      = link_to "Edit tags", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
+      = link_to "Edit tags and title", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
+      = link_to "Jump to histories", "#histories", class: "btn btn-default"
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag
-
   .panel-body == PagesController.rendor_mkd @page.versions.last[:body]
-  table.table.table-striped
+  table.table.table-striped#histories
     thead
       tr
         th #
@@ -21,4 +22,4 @@ p#notice = notice
         tr
           td = i
           td = version[:created_at]
-          td = link_to version[:body], version
+          td = link_to version.first_n_lines(2), version

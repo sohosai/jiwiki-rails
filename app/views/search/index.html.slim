@@ -1,0 +1,27 @@
+nav.navbar.navbar-default
+  = form_tag "/search", method: :get, class: "navbar-form navbar-left" do
+    .form-group
+      = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords" }
+    .form-group
+      = text_field :search, :tags, { class: "form-control", value: (params[:search].try("[]", :tags)), placeholder: "Tags, in, comma, separated" }
+    = submit_tag "Search", class: "btn btn-default", name: ""
+
+h2 Result for #{@query[:keyword]}
+- if @results.size == 0
+  p no result
+- else
+  - @results.each do |page, versions|
+    .panel.panel-default
+      .panel-heading
+        .pull-right
+          p
+            em #{pluralize versions.size, "version"} matched
+        .text-left
+          h4 = link_to page.title, page
+        - page.tags.each do |tag|
+          span.label.label-default = tag
+      .panel-body
+        - versions[0, 5].each do |ver|
+          .panel.panel-default
+            .panel-heading = link_to ver.created_at, ver
+            .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)

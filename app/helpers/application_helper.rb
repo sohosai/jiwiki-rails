@@ -15,10 +15,14 @@ module ApplicationHelper
     "/pages/#{page[:slug]}/"
   end
 
+  def version_path(version)
+    "/pages/#{version.page[:slug]}/versions/#{version[:id]}"
+  end
+
   def versions_path
   end
 
-  def version_path(version)
-    "/pages/#{version.page[:slug]}/versions/#{version[:id]}"
+  def utf8_enforcer_tag
+    "".html_safe
   end
 end

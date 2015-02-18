@@ -2,10 +2,9 @@
   .panel.panel-default
     .panel-heading
       .pull-right
-        p #{page.versions.count} versions, #{I18n.l page.last_edited_at}
-      h4.text-left = link_to page.title, show_page_path(page)
+        p #{pluralize page.versions.count, "version"}, #{I18n.l page.last_edited_at}
+      .text-left
+        h4 = link_to page.title, show_page_path(page)
       - page.tags.each do |tag|
         span.label.label-default = tag
-
-
-    .panel-body  == PagesController.rendor_mkd page.versions.last.body.split(/\r?\n/)[0,5].join("\n")
+    .panel-body  == PagesController.rendor_mkd page.versions.last.first_n_lines(5)

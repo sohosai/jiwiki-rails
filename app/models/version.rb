@@ -11,4 +11,8 @@ class Version
   end
 
   search_in :body
+
+  def first_n_lines(n)
+    body.split(/\r?\n/)[0,n].join("\n")
+  end
 end
