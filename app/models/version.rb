@@ -10,6 +10,9 @@ class Version
     touch
   end
 
+  validates_presence_of :page_id
+  validates_presence_of :body, message: "body can't be blank"
+
   search_in :body
 
   def first_n_lines(n)

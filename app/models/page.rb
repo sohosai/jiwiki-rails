@@ -4,19 +4,19 @@ class Page
   include Mongoid::Timestamps::Updated
   include Mongoid::Slug
 
-  field :slug, type: String
+  field :page_slug, type: String
   field :title, type: String
   field :is_deleted, type: Mongoid::Boolean
   field :tags, type: Array, default: []
 
   has_many :versions, autosave: true
 
-  validates_uniqueness_of :slug
+  validates :page_slug, uniqueness: true, format: { with: /\A[A-Za-z1-9_\-]+\z/ }
   validates_presence_of :title
 
-  slug :slug
+  slug :page_slug
 
-  # virtual attribute to handle create: content of page's initial version
+  # virtual attribute to handle pages#create: content of page's initial version
   attr_accessor :body
 
   def last_edited_at
@@ -24,7 +24,7 @@ class Page
   end
 
   def to_param
-    self[:slug]
+    self[:page_slug]
   end
 
   def tags=(tag)

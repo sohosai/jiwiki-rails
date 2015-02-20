@@ -1,22 +1,22 @@
 module ApplicationHelper
   def show_page_path(page)
-    "/pages/#{page[:slug]}"
+    "/pages/#{page[:page_slug]}"
   end
 
   def edit_page_path(page)
-    "/pages/#{page[:slug]}/versions/new"
+    "/pages/#{page[:page_slug]}/versions/new"
   end
 
   def edit_page_meta_path(page)
-    "/pages/#{page[:slug]}/edit"
+    "/pages/#{page[:page_slug]}/edit"
   end
 
   def page_update_path(page)
-    "/pages/#{page[:slug]}/"
+    "/pages/#{page[:page_slug]}/"
   end
 
   def version_path(version)
-    "/pages/#{version.page[:slug]}/versions/#{version[:id]}"
+    "/pages/#{version.page[:page_slug]}/versions/#{version[:id]}"
   end
 
   def versions_path
