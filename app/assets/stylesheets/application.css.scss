@@ -18,5 +18,10 @@
 @import "bootstrap";
 
 // https://github.com/richleland/pygments-css
-@import "pygments-github"
+@import "pygments-github";
 //@import "bootstrap-responsive";
+
+img {
+  max-width: 100%;
+}
+
