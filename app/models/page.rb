@@ -11,7 +11,7 @@ class Page
 
   has_many :versions, autosave: true
 
-  validates :page_slug, uniqueness: true, format: { with: /\A[A-Za-z1-9_\-]+\z/ }
+  validates :page_slug, uniqueness: true, format: { with: /\A[A-Za-z0-9_\-]+\z/ }
   validates_presence_of :title
 
   slug :page_slug

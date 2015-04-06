@@ -14,8 +14,8 @@
     = f.text_field :title, class: "form-control"
   .field
     = f.label :tags
-    = f.text_field :tags, class: "form-control", value: @page.tags.try(:join, ", ")
+    = f.text_field :tags, class: "form-control", value: @page.tags.try(:join, ", "), placeholder: "tags, in, comma, separated"
   .field
     = f.label :body
-    = f.text_area :body, class: "form-control", "rows" => "20"
+    = f.text_area :body, class: "form-control", value: @page.versions.last.try(:body), "rows" => "20"
   .actions = f.submit class: "btn btn-primary"

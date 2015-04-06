@@ -7,4 +7,4 @@
         h4 = link_to page.title, show_page_path(page)
       - page.tags.each do |tag|
         span.label.label-default = tag
-    .panel-body  == PagesController.rendor_mkd page.versions.last.first_n_lines(5)
+    .panel-body == PagesController.rendor_mkd page.versions.last.first_n_lines(5)
