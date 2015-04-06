@@ -1,3 +1,5 @@
+- provide :title, @page.title
+
 - unless notice.nil?
   #notice.alert.alert-info = notice
 
@@ -11,7 +13,9 @@
     - @page.tags.each do |tag|
       span.label.label-default = tag
   .panel-body == PagesController.rendor_mkd @page.versions.last[:body]
-  table.table.table-striped#histories
+.panel.panel-default
+  .panel-heading#histories Histories
+  table.table.table-striped
     thead
       tr
         th #
