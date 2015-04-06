@@ -25,4 +25,12 @@ module ApplicationHelper
   def utf8_enforcer_tag
     "".html_safe
   end
+
+  def full_title(page_title)
+    if page_title.empty?
+      "JiWiki"
+    else
+      "#{page_title} - JiWiki"
+    end
+  end
 end

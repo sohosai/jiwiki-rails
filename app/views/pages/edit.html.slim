@@ -1,4 +1,6 @@
-h1 Editing page
+- provide :title, "Editing #{@page.title}"
+
+h1 Editing "#{@page.title}"
 
 = form_for @page, url: page_update_path(@page) do |f|
   - if @page.errors.any?
