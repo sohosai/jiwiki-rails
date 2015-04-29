@@ -3,9 +3,7 @@ class SearchController < ApplicationController
     @query = params[:search]
     @page = (params["page"])? params["page"] : 1
     @pages = Page.desc(:updated_at).page @page
-    @results = (@query[:keyword].blank?)?
-      Version.all :
-      Version.full_text_search(@query[:keyword])
+    @results = Version.full_text_search(@query[:keyword], allow_empty_search: true)
     unless @query[:tags].blank?
       target_tags = Page.split_tags @query[:tags]
       @results = @results.select do |ver|

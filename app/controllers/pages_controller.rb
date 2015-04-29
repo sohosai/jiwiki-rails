@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(page_slug: page_params["page_slug"], title: page_params["title"], tags: page_params["tags"])
-    new_version = Version.new(body: page_params["body"])
+    new_version = Version.new(body: page_params["body"], title: page_params["title"])
     new_version.save
     @page.versions << new_version
     respond_to do |format|

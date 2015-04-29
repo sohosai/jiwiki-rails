@@ -19,7 +19,6 @@
 
 // https://github.com/richleland/pygments-css
 @import "pygments-github";
-//@import "bootstrap-responsive";
 
 img {
   max-width: 100%;
@@ -29,3 +28,11 @@ img {
   margin-top: 0;
 }
 
+form {
+  .actions {
+    margin: 1em 0;
+  }
+  .field {
+    margin: .6em 0;
+  }
+}

@@ -3,6 +3,7 @@ class Version
   include Mongoid::Timestamps::Created
   include Mongoid::Search
   field :body, type: String
+  field :title, type: String
 
   # updated_at of Page will be updated when new version is saved
   belongs_to :page, touch: true
@@ -12,8 +13,9 @@ class Version
 
   validates_presence_of :page_id
   validates_presence_of :body, message: "body can't be blank"
+  validates_presence_of :title, message: "title can't be blank"
 
-  search_in :body
+  search_in :body, :title
 
   def first_n_lines(n)
     body.split(/\r?\n/)[0,n].join("\n")

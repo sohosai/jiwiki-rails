@@ -12,6 +12,7 @@ class VersionsController < ApplicationController
     @version = Version.new
     @version.body = params[:version][:body]
     @version.page = Page.find params[:page_slug]
+    @version.title = @version.page.title
     params[:slug] = params[:page_slug]
     if @version.save
       redirect_to controller: "pages", action: "show", slug: params[:page_slug]

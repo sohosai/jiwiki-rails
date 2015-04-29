@@ -1,0 +1,7 @@
+.well
+  = form_tag "/search", method: :get, class: "form-inline" do
+    .form-group
+      = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords" }
+    .form-group
+      = text_field :search, :tags, { class: "form-control", value: (params[:search].try("[]", :tags)), placeholder: "Tags, in, comma, separated" }
+    = submit_tag "Search", class: "btn btn-default", name: ""
