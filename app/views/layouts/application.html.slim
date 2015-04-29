@@ -19,6 +19,8 @@ html
               = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords"}
               .input-group-btn
                 = submit_tag "Search", class: "btn btn-default", name: ""
+        ul.navbar-nav.nav
+          li = link_to "All Pages", "/pages", class: "navbar-link"
         .navbar-right
           nav.navbar-form.navbar-nav.nav
             == link_to "New page", "/pages/new", class: "btn btn-default"

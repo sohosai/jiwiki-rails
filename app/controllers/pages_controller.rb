@@ -6,7 +6,9 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.all
+    @table_view = (params["view"] == "table")
+    @page = (params["page"])? params["page"] : 1
+    @pages = Page.desc(:updated_at).page @page
   end
 
   # GET /pages/1

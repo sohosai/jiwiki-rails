@@ -1,10 +1,10 @@
-- Page.all.desc(:updated_at).limit(30).each do |page|
+- begin
+  - page = Page.find 'home'
   .panel.panel-default
     .panel-heading
-      .pull-right
-        p #{pluralize page.versions.count, "version"}, #{I18n.l page.last_edited_at}
-      .text-left
-        h4 = link_to page.title, show_page_path(page)
-      - page.tags.each do |tag|
-        span.label.label-default = tag
-    .panel-body == PagesController.rendor_mkd page.versions.last.first_n_lines(5)
+      h4 = link_to page.title, show_page_path(page)
+    .panel-body == PagesController.rendor_mkd page.versions.last.body
+
+- rescue
+  .panel.panel-default
+    .panel-body please create page with slug 'home' to display something here

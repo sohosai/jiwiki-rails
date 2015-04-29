@@ -10,18 +10,21 @@ h2 Result for #{@query[:keyword]}
 - if @results.size == 0
   p no result
 - else
-  - @results.each do |page, versions|
+  p = page_entries_info @results
+  - @results.each do |page|
     .panel.panel-default
       .panel-heading
         .pull-right
           p
-            em #{pluralize versions.size, "version"} matched
+            em #{pluralize page[1].size, "version"} matched
         .text-left
-          h4 = link_to page.title, page
-        - page.tags.each do |tag|
+          h4 = link_to page[0].title, page[0]
+        - page[0].tags.each do |tag|
           span.label.label-default = tag
       .panel-body
-        - versions[0, 5].each do |ver|
+        - page[1][0, 5].each do |ver|
           .panel.panel-default
             .panel-heading = link_to ver.created_at, ver
             .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
+  .pagination
+    = paginate @pages, theme: 'twitter-bootstrap-3'

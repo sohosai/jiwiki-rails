@@ -1,18 +1,30 @@
-h1 List of pages
-
-table.table.table-striped
-  thead
-    tr
-      th Title
-      th Tags
-      th Edited at
-
-  tbody
+  h1 List of pages
+  p = page_entries_info @pages
+  - if @table_view
+    table.table.table-striped
+      thead
+        tr
+          th Title
+          th Tags
+          th Edited at
+      tbody
+        - @pages.each do |page|
+          tr
+            td = link_to page.title, show_page_path(page)
+            td
+              == page.tags.map{|tag| link_to tag, "/", class: "label label-default" }.join(", ")
+            td = page.last_edited_at
+  - else
     - @pages.each do |page|
-      tr
-        td = link_to page.title, show_page_path(page)
-        td
-          == page.tags.map{|tag| link_to tag, "/", class: "label label-default" }.join(", ")
-        td = page.last_edited_at
-/        td = link_to 'Show', page
-/        td = link_to 'Edit', edit_page_path(page)
+      .panel.panel-default
+        .panel-heading
+          .pull-right
+            p #{pluralize page.versions.count, "version"}, #{I18n.l page.last_edited_at}
+          .text-left
+            h4 = link_to page.title, show_page_path(page)
+          - page.tags.each do |tag|
+            span.label.label-default = tag
+        .panel-body == PagesController.rendor_mkd page.versions.last.first_n_lines(5)
+
+  .pagination
+    = paginate @pages, theme: 'twitter-bootstrap-3'
