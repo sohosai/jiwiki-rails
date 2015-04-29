@@ -5,31 +5,29 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
     title
       == full_title yield :title
-    == stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    == javascript_include_tag 'application', 'data-turbolinks-track' => true
+    == stylesheet_link_tag 'application', media: 'all'
+    == javascript_include_tag 'application'
     == csrf_meta_tags
   body
-    nav.navbar.navbar-default.navbar-static-top.navbar-collapse
-      .container-fluid
-        button.navbar-toggle.collapsed type="button" data-toggle="collapse"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
+    nav.navbar.navbar-default.navbar-static-top
+      .container
         .navbar-header
+          button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#header-navbar-collapse"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
           = link_to "JiWiki", '/', class: "navbar-brand"
-        .collapse.navbar-collapse
-          .navbar-nav.nav
-            = form_tag "/search", method: :get, class: "navbar-form navbar-left" do
-              .input-group.form-group
-                = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords"}
-                .input-group-btn
-                  = submit_tag "Search", class: "btn btn-default", name: ""
-            ul.navbar-nav.nav
-              li = link_to "All Pages", "/pages", class: "navbar-link"
-              li = link_to "Emojis", "http://www.emoji-cheat-sheet.com/", class: "navbar-link", target: "_blank"
-          .navbar-nav.navbar-right
-            .navbar-form
-              = link_to "New page", "/pages/new", class: "btn btn-default"
+        #header-navbar-collapse.collapse.navbar-collapse
+          = form_tag "/search", method: :get, class: "navbar-form navbar-left" do
+            .input-group.form-group
+              = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords"}
+              .input-group-btn
+                = submit_tag "Search", class: "btn btn-default", name: ""
+          ul.navbar-nav.nav
+            li = link_to "All Pages", "/pages", class: "navbar-link"
+            li = link_to "Emojis", "http://www.emoji-cheat-sheet.com/", class: "navbar-link", target: "_blank"
+          .navbar-form.nav.navbar-nav.navbar-right
+            = link_to "New page", "/pages/new", class: "btn btn-default"
     .container
       == yield
