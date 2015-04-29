@@ -10,19 +10,26 @@ html
     == csrf_meta_tags
   body
     nav.navbar.navbar-default.navbar-static-top.navbar-collapse
-      .container
+      .container-fluid
+        button.navbar-toggle.collapsed type="button" data-toggle="collapse"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
         .navbar-header
           = link_to "JiWiki", '/', class: "navbar-brand"
-        .navbar-nav.nav
-          = form_tag "/search", method: :get, class: "navbar-form" do
-            .input-group.form-group
-              = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords"}
-              .input-group-btn
-                = submit_tag "Search", class: "btn btn-default", name: ""
-        ul.navbar-nav.nav
-          li = link_to "All Pages", "/pages", class: "navbar-link"
-        .navbar-right
-          nav.navbar-form.navbar-nav.nav
-            == link_to "New page", "/pages/new", class: "btn btn-default"
+        .collapse.navbar-collapse
+          .navbar-nav.nav
+            = form_tag "/search", method: :get, class: "navbar-form navbar-left" do
+              .input-group.form-group
+                = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords"}
+                .input-group-btn
+                  = submit_tag "Search", class: "btn btn-default", name: ""
+            ul.navbar-nav.nav
+              li = link_to "All Pages", "/pages", class: "navbar-link"
+              li = link_to "Emojis", "http://www.emoji-cheat-sheet.com/", class: "navbar-link", target: "_blank"
+          .navbar-nav.navbar-right
+            .navbar-form
+              = link_to "New page", "/pages/new", class: "btn btn-default"
     .container
       == yield

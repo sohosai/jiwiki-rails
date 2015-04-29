@@ -1,10 +1,13 @@
 - begin
   - page = Page.find 'home'
   .panel.panel-default
-    .panel-heading
-      h4 = link_to page.title, show_page_path(page)
     .panel-body == PagesController.rendor_mkd page.versions.last.body
-
+    .panel-footer
+      = link_to "Show this page (#{page.title})", show_page_path(page)
 - rescue
   .panel.panel-default
     .panel-body please create page with slug 'home' to display something here
+
+small
+  .text-center JiWiki has #{Page.all.size} pages and #{Version.all.size} versions
+

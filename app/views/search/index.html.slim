@@ -1,12 +1,14 @@
-nav.navbar.navbar-default
-  = form_tag "/search", method: :get, class: "navbar-form navbar-left" do
+- provide :title, "\"#{@query[:keyword]}\" - Search"
+
+.well
+  = form_tag "/search", method: :get, class: "form-inline" do
     .form-group
       = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords" }
     .form-group
       = text_field :search, :tags, { class: "form-control", value: (params[:search].try("[]", :tags)), placeholder: "Tags, in, comma, separated" }
     = submit_tag "Search", class: "btn btn-default", name: ""
 
-h2 Result for #{@query[:keyword]}
+h1 Result for "#{@query[:keyword]}"
 - if @results.size == 0
   p no result
 - else
@@ -26,5 +28,4 @@ h2 Result for #{@query[:keyword]}
           .panel.panel-default
             .panel-heading = link_to ver.created_at, ver
             .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
-  .pagination
-    = paginate @pages, theme: 'twitter-bootstrap-3'
+  = paginate @results, theme: 'twitter-bootstrap-3'
