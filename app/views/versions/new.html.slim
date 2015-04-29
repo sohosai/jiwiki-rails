@@ -1,5 +1,8 @@
 - provide :title, "Editing #{@version.page.title}"
 
-h1 Editing #{@version.page.title}
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li = link_to @version.page.title, show_page_path(@version.page)
+  li.active Edit "#{@version.page.title}"
 
 == render 'form'

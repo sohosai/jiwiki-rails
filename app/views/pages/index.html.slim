@@ -1,8 +1,11 @@
 - provide :title, "All pages"
 
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li.active All pages
+
 = render 'search/form'
 
-h1 All pages
 p = page_entries_info @pages
 - if @table_view
   table.table.table-striped

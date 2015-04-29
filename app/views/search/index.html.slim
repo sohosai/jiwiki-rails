@@ -1,25 +1,25 @@
 - provide :title, "\"#{@query[:keyword]}\" - Search"
 
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li.active Result for "#{@query[:keyword]}" (#{page_entries_info @results})
+
 = render 'form'
 
-h1 Result for "#{@query[:keyword]}"
-- if @results.size == 0
-  p no result
-- else
-  p = page_entries_info @results
-  - @results.each do |page|
-    .panel.panel-default
-      .panel-heading
-        .pull-right
-          p
-            em #{pluralize page[1].size, "version"} matched
-        .text-left
-          h4 = link_to page[0].title, page[0]
-        - page[0].tags.each do |tag|
-          span.label.label-default = tag
-      .panel-body
-        - page[1][0, 5].each do |ver|
-          .panel.panel-default
-            .panel-heading = link_to ver.created_at, ver
-            .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
-  = paginate @results, theme: 'twitter-bootstrap-3'
+- @results.each do |page|
+  .panel.panel-default
+    .panel-heading
+      .pull-right
+        p
+          em #{pluralize page[1].size, "version"} matched
+      .text-left
+        h4 = link_to page[0].title, page[0]
+      - page[0].tags.each do |tag|
+        span.label.label-default = tag
+    .panel-body
+      - page[1][0, 5].each do |ver|
+        .panel.panel-default
+          .panel-heading = link_to ver.created_at, ver
+          .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
+
+= paginate @results, theme: 'twitter-bootstrap-3'

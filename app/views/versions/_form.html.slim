@@ -1,9 +1,9 @@
 = form_for @version do |f|
   - if @version.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@version.errors.count, "error")} prohibited this page from being saved:"
+    #error_explanation.alert.alert-danger role="alert"
+      strong = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
       ul
-        - @version.errors.full_messages.each do |message|
+        - @page.errors.full_messages.each do |message|
           li = message
 
   .field.form-group

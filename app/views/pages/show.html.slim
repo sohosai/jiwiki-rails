@@ -1,14 +1,19 @@
 - provide :title, @page.title
 
-- unless notice.nil?
-  #notice.alert.alert-info = notice
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li.active = @page.title
+
+- if params[:notice]
+  #notice.alert.alert-info = params[:notice]
 
 .panel.panel-default
   .panel-heading
     .pull-right
-      = link_to "Edit", edit_page_path(@page), class: "btn btn-primary", "role" => "button"
-      = link_to "Edit tags and title", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
-      = link_to "Jump to histories", "#histories", class: "btn btn-default"
+      .btn-group
+        = link_to "Edit", edit_page_path(@page), class: "btn btn-primary", "role" => "button"
+        = link_to "Edit tags and title", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
+        = link_to "Jump to histories", "#histories", class: "btn btn-default"
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag

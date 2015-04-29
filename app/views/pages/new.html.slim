@@ -1,5 +1,7 @@
 - provide :title, "Create new page"
 
-h1 New page
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li.active New page
 
 == render 'form'

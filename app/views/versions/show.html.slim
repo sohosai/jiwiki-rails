@@ -1,7 +1,9 @@
-- provide :title, "#{@version.page.title}"
+- provide :title, "#{@version.page.title} @ #{@version.created_at}"
 
-p
-  = link_to "Back to page #{@version.page.title}", show_page_path(@version.page), class: "btn btn-default"
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li = link_to @version.page.title, show_page_path(@version.page)
+  li.active @ #{@version.created_at}
 
 .panel.panel-default
   .panel-heading

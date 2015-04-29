@@ -1,14 +1,16 @@
 = form_for @page do |f|
   - if @page.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+    #error_explanation.alert.alert-danger role="alert"
+      strong = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
       ul
         - @page.errors.full_messages.each do |message|
           li = message
 
   .field.form-group
-    = f.label :page_slug
-    = f.text_field :page_slug, class: "form-control", value: @page[:page_slug] || SecureRandom.uuid
+    = f.label :page_slug, "Page slug (friendly URL)"
+    .input-group
+      .input-group-addon = "/pages/"
+      = f.text_field :page_slug, class: "form-control", value: @page[:page_slug] || SecureRandom.uuid
   .field
     = f.label :title
     = f.text_field :title, class: "form-control"
