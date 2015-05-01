@@ -1,3 +1,9 @@
+production:
+  sessions:
+    default:
+      database: jiwiki_rails_production
+      hosts:
+        - localhost:27017
 development:
   # Configure available database sessions. (required)
   sessions:
