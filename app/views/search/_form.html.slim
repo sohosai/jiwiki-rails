@@ -1,7 +1,18 @@
-.well
-  = form_tag "/search", method: :get, class: "form-inline" do
+.well.well-sm
+  = form_tag "/search", method: :get, class: "form" do
     .form-group
+      = label :search, "Keywords"
       = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords" }
     .form-group
+      = label :search, "Tags"
       = text_field :search, :tags, { class: "form-control", value: (params[:search].try("[]", :tags)), placeholder: "Tags, in, comma, separated" }
+    .form-group
+      = label :search, "Sort order"
+      = select :search, :sort_order,
+        { "Newest first"       => :newest_first,
+          "Oldest first"       => :oldest_first,
+          "Title (Ascending)"  => :title_ascending,
+          "Title (descending)" => :title_descending },
+        { selected: (params.try(:[], "search").try(:[], "sort_order") || "newest_first").to_sym },
+        { class: "form-control" }
     = submit_tag "Search", class: "btn btn-default", name: ""

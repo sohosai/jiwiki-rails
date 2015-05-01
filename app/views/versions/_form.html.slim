@@ -8,6 +8,20 @@
 
   .field.form-group
     = f.label :body
-    = f.text_area :body, class: "form-control", "rows" => "20", value: @version.page.versions.last[:body]
+    .row
+      .col-sm-6
+        = f.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: @version.page.versions.last[:body], rows: 20
+      .col-sm-6
+        .panel.panel-default
+          .panel-heading
+            | Preview
+            .pull-right
+              label.checkbox-inline
+                input#form-pages-new-autoupdate type="checkbox" checked="checked" Auto Update
+              #form-pages-new-manualupdate.btn.btn-info.btn-xs Update
+          #form-pages-new-body-preview.panel-body
+            h3 Preview will appear here
   .actions
     = f.submit class: "btn btn-primary"
+
+= javascript_include_tag 'pages/new'
