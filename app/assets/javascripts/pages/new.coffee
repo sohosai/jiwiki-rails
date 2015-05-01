@@ -43,5 +43,6 @@ do -> (
   ),false)
   # warn on unload
   window.onbeforeunload = (-> "Your edits were not saved!")
+  document.getElementById("form-pages-new-submit").addEventListener("click", (-> window.onbeforeunload = null))
 )
 
