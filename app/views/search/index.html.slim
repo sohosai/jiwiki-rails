@@ -1,8 +1,8 @@
 - provide :title, "#{@query[:keyword]} - Search"
 
-ol.breadcrumb
-  li = link_to "Home", root_path
-  li.active Result for "#{@query[:keyword]}" (#{page_entries_info @results})
+- breadcrumb :search, @query[:keyword]
+
+p = page_entries_info @results
 
 = render 'form'
 

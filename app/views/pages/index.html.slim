@@ -1,8 +1,6 @@
 - provide :title, "All pages"
 
-ol.breadcrumb
-  li = link_to "Home", root_path
-  li.active All pages
+- breadcrumb :pages
 
 = render 'search/form'
 

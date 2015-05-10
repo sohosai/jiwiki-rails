@@ -1,5 +1,7 @@
 - provide :title, "Editing #{@version.page.title}"
 
+- breadcrumb :version, @version
+
 ol.breadcrumb
   li = link_to "Home", root_path
   li = link_to @version.page.title, show_page_path(@version.page)

@@ -31,5 +31,7 @@ module JiwikiRails
     config.assets.paths << Emoji.images_path
 
     config.assets.precompile << "emoji/**/*.png"
+
+    config.title = "JiWiki"
   end
 end

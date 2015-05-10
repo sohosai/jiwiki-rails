@@ -20,6 +20,19 @@
 // https://github.com/richleland/pygments-css
 @import "pygments-github";
 
+// breadcrumb in header as title and navigation
+.navbar-header {
+  ol.breadcrumb {
+    margin: 0 7px;
+    background: none;
+
+    @media (min-width: 768px) {
+      float: left;
+      margin: 7px 10px;
+    }
+  }
+}
+
 img {
   max-width: 100%;
 }

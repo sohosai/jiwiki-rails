@@ -1,8 +1,6 @@
 - provide :title, @page.title
 
-ol.breadcrumb
-  li = link_to "Home", root_path
-  li.active = @page.title
+- breadcrumb :page, @page
 
 - if params[:notice]
   #notice.alert.alert-info = params[:notice]
