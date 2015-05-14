@@ -2,11 +2,12 @@
 
 ol.breadcrumb
   li = link_to "Home", root_path
-  li.active All pages
+  li.active All pages (#{page_entries_info @pages})
 
 = render 'search/form'
 
-p = page_entries_info @pages
+= paginate @pages, theme: 'twitter-bootstrap-3'
+
 - if @table_view
   table.table.table-striped
     thead

@@ -15,4 +15,4 @@
           "Title (descending)" => :title_descending },
         { selected: (params.try(:[], "search").try(:[], "sort_order") || "newest_first").to_sym },
         { class: "form-control" }
-    = submit_tag "Search", class: "btn btn-default", name: ""
+    = submit_tag "Search", class: "btn btn-default", name: "" do
