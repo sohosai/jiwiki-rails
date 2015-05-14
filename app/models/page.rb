@@ -35,4 +35,12 @@ class Page
   def self.split_tags(str)
     str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
   end
+
+  def self.slug_to_markdown_link(slug)
+    page = Page.find_by(page_slug: slug)
+    # FIXME: use link_to helper method
+    "[#{page.title}](/pages/#{slug})"
+  rescue
+    "<s>[link to #{slug}]</s>"
+  end
 end

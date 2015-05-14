@@ -72,7 +72,11 @@ class PagesController < ApplicationController
   end
 
   def self.rendor_mkd(str)
-    @@mkd_processor.call(str)[:output].to_s
+    # preprocess embedded link between pages
+    s = str.gsub(/\[\]\(:([^\/\?\s\+=]+)\)/m) do
+      Page.slug_to_markdown_link $1
+    end
+    @@mkd_processor.call(s)[:output].to_s
   end
 
   private
