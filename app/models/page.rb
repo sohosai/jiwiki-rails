@@ -2,7 +2,6 @@
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps::Updated
-  include Mongoid::Slug
 
   field :page_slug, type: String
   field :title, type: String
@@ -11,10 +10,8 @@ class Page
 
   has_many :versions, autosave: true
 
-  validates :page_slug, uniqueness: true, format: { with: /\A[A-Za-z0-9_\-]+\z/ }
+  validates :page_slug, uniqueness: true, format: { with: /\A[^\/\?\s\+=]+\z/ }
   validates_presence_of :title
-
-  slug :page_slug
 
   # virtual attribute to handle pages#create: content of page's initial version
   attr_accessor :body

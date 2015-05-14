@@ -2,6 +2,7 @@ class Version
   include Mongoid::Document
   include Mongoid::Timestamps::Created
   include Mongoid::Search
+
   field :body, type: String
   field :title, type: String
 

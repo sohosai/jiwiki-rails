@@ -33,7 +33,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'mongoid', '~> 4.0.0'
-gem 'mongoid-slug'
 gem 'mongoid_search'
 
 gem 'slim-rails'
