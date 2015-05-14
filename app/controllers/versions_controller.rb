@@ -5,7 +5,7 @@ class VersionsController < ApplicationController
   end
 
   def new
-    @version = Version.new(page: Page.find_by(slug: params[:page_slug]))
+    @version = Version.new(page: Page.find_by(page_slug: params[:page_slug]))
   end
 
   def create
