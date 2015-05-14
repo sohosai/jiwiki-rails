@@ -17,7 +17,7 @@ ol.breadcrumb
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag
-  .panel-body == PagesController.rendor_mkd @page.versions.last[:body]
+  .panel-body.markdown-body == PagesController.rendor_mkd @page.versions.last[:body]
 .panel.panel-default
   .panel-heading#histories Histories
   table.table.table-striped

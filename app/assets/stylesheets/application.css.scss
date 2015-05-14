@@ -17,9 +17,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// https://github.com/richleland/pygments-css
-@import "pygments-github";
-
 img {
   max-width: 100%;
 }
@@ -37,5 +34,28 @@ form {
   }
   .markdown-input {
     font-family: monospace;
+  }
+}
+
+.markdown-body {
+  h1 {
+    font-size: 24px;
+    line-height: 1.4em;
+    border-bottom: 2px solid #e8e8e8;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.4em;
+    border-bottom: 1px solid #ccc;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 1.4em;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  img.emoji {
+    width: 1em;
+    height: 1em;
   }
 }

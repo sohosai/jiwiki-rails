@@ -12,4 +12,4 @@ ol.breadcrumb
     - @version.page.tags.each do |tag|
       span.label.label-default = tag
 
-  .panel-body == PagesController.rendor_mkd @version[:body]
+  .panel-body.markdown-body == PagesController.rendor_mkd @version[:body]
