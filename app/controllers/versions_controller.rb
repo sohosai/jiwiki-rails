@@ -11,7 +11,7 @@ class VersionsController < ApplicationController
   def create
     @version = Version.new
     @version.body = params[:version][:body]
-    @version.page = Page.find_by slug: params[:page_slug]
+    @version.page = Page.find_by page_slug: params[:page_slug]
     @version.title = @version.page.title
     params[:slug] = params[:page_slug]
     if @version.save

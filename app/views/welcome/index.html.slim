@@ -2,7 +2,7 @@ ol.breadcrumb
   li.active Home
 
 - begin
-  - page = Page.find_by slug: 'home'
+  - page = Page.find_by page_slug: 'home'
   .panel.panel-default
     .panel-body == PagesController.rendor_mkd page.versions.last.body
     .panel-footer
