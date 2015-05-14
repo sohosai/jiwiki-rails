@@ -2,7 +2,7 @@ ol.breadcrumb
   li.active Home
 
 - begin
-  - page = Page.find 'home'
+  - page = Page.find_by slug: 'home'
   .panel.panel-default
     .panel-body == PagesController.rendor_mkd page.versions.last.body
     .panel-footer
@@ -13,4 +13,3 @@ ol.breadcrumb
 
 small
   .text-center JiWiki has #{Page.all.size} pages and #{Version.all.size} versions
-
