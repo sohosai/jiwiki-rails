@@ -37,6 +37,10 @@ form {
   .markdown-input {
     font-family: monospace;
   }
+
+  textarea {
+    resize: vertical;
+  }
 }
 
 .markdown-body {

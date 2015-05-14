@@ -1,13 +1,15 @@
 do -> (
-  body = document.getElementById("form-pages-new-body")
-  preview = document.getElementById("form-pages-new-body-preview")
+  body = $("#form-pages-new-body")
+  preview = $("#form-pages-new-body-preview")
   last_body = ""
   update_preview = () -> (
     $.post(
       "/api/v1/markdown_renderer/transform",
-      { markdown: body.value },
+      { markdown: body.val() },
       (data) -> (
-        preview.innerHTML = data.html
+        preview.html(data.html)
+        # make textbox and preview the same size
+        body.height(preview.height()) if preview.height() > body.height()
       ),
       "json"
     )
@@ -16,10 +18,10 @@ do -> (
   window.setInterval(
     (->
       if (
-        body.value != last_body &&
+        body.val() != last_body &&
         document.getElementById("form-pages-new-autoupdate").checked
       )
-        last_body = body.value
+        last_body = body.val()
         update_preview()
     ),
     3000
@@ -27,7 +29,7 @@ do -> (
   # manual update
   document.getElementById("form-pages-new-manualupdate").addEventListener("click", update_preview)
   # handle <tab> in textarea
-  body.addEventListener('keydown', ((e) ->
+  body.keydown(((e) ->
     if e.keyCode == 9
       start = this.selectionStart
       end = this.selectionEnd
@@ -40,9 +42,8 @@ do -> (
       this.selectionStart = this.selectionEnd = start + 2
 
       e.preventDefault()
-  ),false)
+  ))
   # warn on unload
   window.onbeforeunload = (-> "Your edits were not saved!")
   document.getElementById("form-pages-new-submit").addEventListener("click", (-> window.onbeforeunload = null))
 )
-
