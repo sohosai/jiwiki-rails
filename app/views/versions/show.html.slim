@@ -3,11 +3,10 @@
 ol.breadcrumb
   li = link_to "Home", root_path
   li = link_to @version.page.title, show_page_path(@version.page)
-  li.active @ #{@version.created_at}
+  li.active #{full_time_ago @version.created_at}
 
 .panel.panel-default
   .panel-heading
-    .pull-right = @version.created_at
     h2 = @version.page.title
     - @version.page.tags.each do |tag|
       span.label.label-default = tag

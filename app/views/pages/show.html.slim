@@ -30,5 +30,5 @@ ol.breadcrumb
       - @page.versions.each_with_index do |version, i|
         tr
           td = i
-          td = version[:created_at]
+          td = full_time_ago version[:created_at]
           td = link_to version.first_n_lines(2), version

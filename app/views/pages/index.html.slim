@@ -27,7 +27,7 @@ ol.breadcrumb
     .panel.panel-default
       .panel-heading
         .pull-right
-          p #{pluralize page.versions.count, "version"}, #{I18n.l page.last_edited_at}
+          p #{pluralize page.versions.count, "version"}, #{full_time_ago page.last_edited_at}
         .text-left
           h4 = link_to page.title, show_page_path(page)
         - page.tags.each do |tag|

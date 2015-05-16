@@ -21,7 +21,7 @@ ol.breadcrumb
     .panel-body
       - page[1][0, 5].each_with_index do |ver, i|
         .panel.panel-default
-          .panel-heading = link_to ver.created_at, ver
+          .panel-heading = link_to full_time_ago(ver.created_at), ver
           - if i == 0
             .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
 

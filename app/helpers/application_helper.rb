@@ -33,4 +33,8 @@ module ApplicationHelper
       "#{page_title} - JiWiki"
     end
   end
+
+  def full_time_ago(time)
+    "#{time_ago_in_words time} ago (#{time.in_time_zone.strftime "%Y-%m-%d %H:%M:%S"})"
+  end
 end
