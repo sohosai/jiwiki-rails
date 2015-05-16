@@ -3,7 +3,7 @@
 ol.breadcrumb
   li = link_to "Home", root_path
   li = link_to @version.page.title, show_page_path(@version.page)
-  li.active #{full_time_ago @version.created_at}
+  li.active #{(@version.find_index + 1).ordinalize} of #{@version.page.versions.length} @ #{full_time_ago @version.created_at}
 
 .panel.panel-default
   .panel-heading
