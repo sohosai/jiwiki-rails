@@ -28,10 +28,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(page_slug: page_params["page_slug"], title: page_params["title"], tags: page_params["tags"])
-    new_version = Version.new(body: page_params["body"], title: page_params["title"])
-    new_version.save
-    @page.versions << new_version
+    @page = Page.new_with_body(params["page"])
     respond_to do |format|
       if @page.save
         format.html { redirect_to action: "show", slug: page_params[:page_slug] , notice: 'Page was successfully created.' }
@@ -47,7 +44,7 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1.json
   def update
     if page_params[:body]
-      @page.versions << Version.new(body: page_params[:body]).save
+      @page.versions << Version.new(body: page_params[:body], title: page_params[:title]).save
       page_params.delete :body
     end
     respond_to do |format|

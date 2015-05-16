@@ -9,10 +9,11 @@ class VersionsController < ApplicationController
   end
 
   def create
-    @version = Version.new
-    @version.body = params[:version][:body]
-    @version.page = Page.find_by page_slug: params[:page_slug]
-    @version.title = @version.page.title
+    @version = Version.new(
+      body: params[:version][:body],
+      page: Page.find_by(page_slug: params[:page_slug]),
+      title: @version.page.title
+    )
     params[:slug] = params[:page_slug]
     if @version.save
       redirect_to controller: "pages", action: "show", slug: params[:page_slug]

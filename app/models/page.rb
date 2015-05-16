@@ -32,15 +32,26 @@ class Page
     end
   end
 
-  def self.split_tags(str)
-    str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
-  end
+  class << self
+    def split_tags(str)
+      str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
+    end
 
-  def self.slug_to_markdown_link(slug)
-    page = Page.find_by(page_slug: slug)
-    # FIXME: use link_to helper method
-    "[#{page.title}](/pages/#{slug})"
-  rescue
-    "<s>[link to #{slug}]</s>"
+    def slug_to_markdown_link(slug)
+      page = Page.find_by(page_slug: slug)
+      # FIXME: use link_to helper method
+      "[#{page.title}](/pages/#{slug})"
+    rescue
+      "<s>[link to #{slug}]</s>"
+    end
+
+    def new_with_body(params)
+      new(
+        page_slug: params["page_slug"],
+        title: params["title"],
+        tags: params["tags"],
+        versions: [Version.create(body: params["body"], title: params["title"])]
+      )
+    end
   end
 end
