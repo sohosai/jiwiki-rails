@@ -21,4 +21,8 @@ class Version
   def first_n_lines(n)
     body.split(/\r?\n/)[0,n].join("\n")
   end
+
+  def find_index
+    page.versions.find_index(self)
+  end
 end
