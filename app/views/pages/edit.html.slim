@@ -1,6 +1,12 @@
-- provide :title, "Editing #{@page.title}"
+- provide :title, "Edit #{@page.title}"
 
-h1 Editing "#{@page.title}"
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li = link_to @page.title, @page
+  li.active Edit
+
+.alert.alert-warning
+  | This action cannot be undone
 
 = form_for @page, url: page_update_path(@page) do |f|
   - if @page.errors.any?
@@ -17,3 +23,12 @@ h1 Editing "#{@page.title}"
     = f.label :tags
     = f.text_field :tags, class: "form-control", value: @page.tags.join(", ")
   .actions = f.submit class: "btn btn-primary"
+    span.glyphicon.glyphicon-ok
+
+hr
+
+p
+  - unless @page.deleted?
+    = link_to "Archive Page", @page, method: :delete, class: "btn btn-danger"
+  - else
+    .btn.btn-danger.disabled This page is archived

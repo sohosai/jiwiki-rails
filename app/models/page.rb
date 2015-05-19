@@ -5,10 +5,10 @@ class Page
 
   field :page_slug, type: String
   field :title, type: String
-  field :is_deleted, type: Mongoid::Boolean
+  field :deleted_at, type: DateTime
   field :tags, type: Array, default: []
 
-  has_many :versions, autosave: true
+  embeds_many :versions, autosave: true
 
   validates :page_slug, uniqueness: true, format: { with: /\A[^\/\?\s\+=]+\z/ }
   validates_presence_of :title
@@ -23,6 +23,16 @@ class Page
   def to_param
     self[:page_slug]
   end
+
+  def delete
+    update( deleted_at: Time.now )
+  end
+
+  def deleted?
+    !(self.deleted_at.nil?)
+  end
+
+  scope :deleted, -> { exists(deleted_at: true) }
 
   def tags=(tag)
     if tag.is_a? String

@@ -15,4 +15,13 @@
           "Title (descending)" => :title_descending },
         { selected: (params.try(:[], "search").try(:[], "sort_order") || "newest_first").to_sym },
         { class: "form-control" }
+    .form-group
+      = label :search, "Archive flag"
+      = select :search, :archive,
+        { "Show all posts"          => :all,
+          "Show posts not archived" => :not_archived,
+          "Show archived posts"     => :archived },
+        { selected: (params.try(:[], "search").try(:[], "archive") || "not_archived").to_sym },
+        { class: "form-control" }
+
     = submit_tag "Search", class: "btn btn-default", name: "" do

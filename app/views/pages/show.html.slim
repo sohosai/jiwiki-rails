@@ -7,17 +7,28 @@ ol.breadcrumb
 - if params[:notice]
   #notice.alert.alert-info = params[:notice]
 
+- if @page.deleted?
+  .alert.alert-info This page is archived
+
 .panel.panel-default
   .panel-heading
     .pull-right
       .btn-group
-        = link_to "Edit", edit_page_path(@page), class: "btn btn-primary", "role" => "button"
-        = link_to "Edit tags and title", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
-        = link_to "Jump to histories", "#histories", class: "btn btn-default"
+        - unless @page.deleted?
+          = link_to edit_page_path(@page), class: "btn btn-primary", "role" => "button" do
+            span.glyphicon.glyphicon-pencil
+            | Update
+        = link_to edit_page_meta_path(@page), class: "btn btn-default", "role" => "button" do
+          span.glyphicon.glyphicon-cog
+          | Edit
+        = link_to "#histories", class: "btn btn-default" do
+          span.glyphicon.glyphicon-th-list
+          | Histories
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag
   .panel-body.markdown-body == PagesController.rendor_mkd @page.versions.last[:body]
+
 .panel.panel-default
   .panel-heading#histories Histories
   table.table.table-striped

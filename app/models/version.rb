@@ -7,7 +7,7 @@ class Version
   field :title, type: String
 
   # updated_at of Page will be updated when new version is saved
-  belongs_to :page, touch: true
+  embedded_in :page, touch: true
   after_save do
     touch
   end

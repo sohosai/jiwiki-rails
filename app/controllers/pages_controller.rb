@@ -8,7 +8,12 @@ class PagesController < ApplicationController
   def index
     @table_view = (params["view"] == "table")
     @page = (params["page"])? params["page"] : 1
-    @pages = Page.desc(:updated_at).page @page
+    @pages = Page.not.deleted.desc(:updated_at).page @page
+  end
+
+  def archived
+    @page = (params["page"])? params["page"] : 1
+    @pages = Page.deleted.desc(:updated_at).page @page
   end
 
   # GET /pages/1
@@ -61,9 +66,9 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
-    @page.destroy
+    @page.delete
     respond_to do |format|
-      format.html { redirect_to pages_path, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to @page, notice: 'Page was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

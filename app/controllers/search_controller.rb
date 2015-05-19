@@ -12,13 +12,31 @@ class SearchController < ApplicationController
       else # when newest_first
         :created_at.desc
       end
-    @results = Version.full_text_search(@query[:keyword], allow_empty_search: true).order_by(@sort_order)
+
+    @results = Version.
+      full_text_search(@query[:keyword], allow_empty_search: true).
+      order_by(@sort_order)
+
+    @results = @results.group_by{ |ver| ver.page }
+
     unless @query[:tags].blank?
       target_tags = Page.split_tags @query[:tags]
-      @results = @results.select do |ver|
-        (target_tags - ver.page.tags).empty?
+      @results = @results.select do |p, v|
+        (target_tags - p.tags).empty?
       end
     end
-    @results = Kaminari.paginate_array(@results.group_by{ |ver| ver.page }.to_a).page @page
+
+    case @query["archive"]
+    when "not_archived"
+      @results = @results.select do |k, v|
+        ! k.deleted?
+      end
+    when "archived"
+      @results = @results.select do |k, v|
+        k.deleted?
+      end
+    end
+
+    @results = Kaminari.paginate_array(@results.to_a).page @page
   end
 end
