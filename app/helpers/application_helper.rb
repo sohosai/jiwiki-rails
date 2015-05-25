@@ -15,6 +15,10 @@ module ApplicationHelper
     "/pages/#{page[:page_slug]}/"
   end
 
+  def page_versions_path(page)
+    "/pages/#{page[:page_slug]}/versions"
+  end
+
   def version_path(version)
     "/pages/#{version.page[:page_slug]}/versions/#{version[:id]}"
   end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
   root 'welcome#index'
 
   resources :pages, param: :slug do
@@ -17,9 +20,6 @@ Rails.application.routes.draw do
       post 'markdown_renderer/transform', controller: :markdown_renderer
     end
   end
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

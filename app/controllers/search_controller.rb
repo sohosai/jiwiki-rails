@@ -4,15 +4,15 @@ class SearchController < ApplicationController
     @page = (params["page"])? params["page"] : 1
     @sort_order = case @query["sort_order"]
       when "title_ascending"
-        :title.asc
+        "title ASC"
       when "title_descending"
-        :title.desc
+        "title DESC"
       when "oldest_first"
-        :created_at.asc
+        "created_at ASC"
       else # when newest_first
-        :created_at.desc
+        "created_at DESC"
       end
-    @results = Version.full_text_search(@query[:keyword], allow_empty_search: true).order_by(@sort_order)
+    @results = Version.order(@sort_order).full_text_search(@query[:keyword], allow_empty_search: true)
     unless @query[:tags].blank?
       target_tags = Page.split_tags @query[:tags]
       @results = @results.select do |ver|

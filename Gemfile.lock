@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
     arel (6.0.0)
     autoprefixer-rails (5.1.11)
       execjs
@@ -48,7 +50,6 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    bson (2.3.0)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -63,13 +64,11 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     commonjs (0.2.7)
-    connection_pool (2.2.0)
     crass (1.0.2)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     escape_utils (1.1.0)
     execjs (2.5.2)
-    fast-stemmer (1.0.2)
     gemoji (2.1.0)
     github-linguist (4.5.4)
       charlock_holmes (~> 0.7.3)
@@ -111,26 +110,13 @@ GEM
     mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.1)
-    mongoid (4.0.2)
-      activemodel (~> 4.0)
-      moped (~> 2.0.0)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-    mongoid_search (0.3.2)
-      fast-stemmer (~> 1.0.0)
-      mongoid (>= 3.0.0)
-    moped (2.0.4)
-      bson (~> 2.2)
-      connection_pool (~> 2.0)
-      optionable (~> 0.2.0)
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     nokogumbo (1.4.1)
       nokogiri
-    optionable (0.2.0)
-    origin (2.1.1)
     petname (0.0.1)
+    pg (0.18.2)
     posix-spawn (0.3.11)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -184,6 +170,8 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
     ref (1.0.5)
+    ridgepole (0.5.0)
+      activerecord
     rugged (0.23.0b1)
     sanitize (4.0.0)
       crass (~> 1.0.2)
@@ -241,6 +229,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   bootstrap-kaminari-views
   bootstrap-sass (~> 3.3.3)
   byebug
@@ -249,13 +238,13 @@ DEPENDENCIES
   jquery-rails
   kaminari
   less-rails
-  mongoid (~> 4.0.0)
-  mongoid_search
   petname
+  pg
   pry-byebug
   pry-rails
   qiita-markdown
   rails (= 4.2.0)
+  ridgepole
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails
