@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   get '/search' => 'search#index'
 
+  get '/tags' => 'tags#index'
+  get '/tags/:tag' => 'tags#show'
+
   namespace :api, { format: 'json' } do
     namespace :v1 do
       post 'markdown_renderer/transform', controller: :markdown_renderer

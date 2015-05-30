@@ -20,6 +20,7 @@ ol.breadcrumb
         = link_to page_versions_path(@page), class: "btn btn-default" do
           span.glyphicon.glyphicon-th-list
           | History
+          .badge = @page.versions.size
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag

@@ -70,4 +70,8 @@ form {
     width: 1em;
     height: 1em;
   }
+
+  table {
+    @extend .table, .table-bordered, .table-condensed;
+  }
 }

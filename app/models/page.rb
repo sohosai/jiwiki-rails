@@ -26,10 +26,6 @@ class Page < ActiveRecord::Base
     end
   end
 
-  def versions
-    Version.where(page_id: id)
-  end
-
   class << self
     def split_tags(str)
       str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
@@ -41,6 +37,19 @@ class Page < ActiveRecord::Base
       "[#{page.title}](/pages/#{slug})"
     rescue
       "<s>[link to #{slug}]</s>"
+    end
+
+    def sort_order_to_query(sort_order)
+      case sort_order
+      when "title_ascending"
+        "pages.title ASC"
+      when "title_descending"
+        "pages.title DESC"
+      when "oldest_first"
+        "pages.created_at ASC"
+      else # when newest_first or default
+        "pages.created_at DESC"
+      end
     end
   end
 end

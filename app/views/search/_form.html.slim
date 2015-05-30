@@ -4,9 +4,6 @@
       = label :search, "Keywords"
       = text_field :search, :keyword, { class: "form-control", value: (params[:search].try("[]", :keyword)), enforce_utf8: true, placeholder: "Keywords" }
     .form-group
-      = label :search, "Tags"
-      = text_field :search, :tags, { class: "form-control", value: (params[:search].try("[]", :tags)), placeholder: "Tags, in, comma, separated" }
-    .form-group
       = label :search, "Sort order"
       = select :search, :sort_order,
         { "Newest first"       => :newest_first,

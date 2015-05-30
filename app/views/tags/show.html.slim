@@ -1,11 +1,9 @@
-- provide :title, "All pages"
-
 ol.breadcrumb
   li = link_to "Home", root_path
-  li.active All pages (#{page_entries_info @pages})
+  li = link_to "All tags", tags_path
+  li.active #{@tag} (#{page_entries_info @pages})
 
 = paginate @pages, theme: 'twitter-bootstrap-3'
-
 
 - @pages.each do |page|
   .panel.panel-default

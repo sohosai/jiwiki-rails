@@ -6,9 +6,8 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @table_view = (params["view"] == "table")
     @page = (params["page"])? params["page"] : 1
-    @pages = Page.order(updated_at: :desc).page @page
+    @pages = Page.order(updated_at: :desc).page(@page).includes(:versions).eager_load(:versions)
   end
 
   # GET /pages/1
@@ -79,6 +78,13 @@ class PagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def take_params(*param_keys)
+    overwrites = param_keys.extract_options!
+    param_keys = %w(search page sort_order) if param_keys.blank?
+    params.dup.extract!(*param_keys).update(overwrites)
+  end
+  helper_method :take_params
 
   def self.rendor_mkd(str)
     # preprocess embedded link between pages
