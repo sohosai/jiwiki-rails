@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  @@mkd_processor = Qiita::Markdown::Processor.new
+  @@mkd_processor = Qiita::Markdown::Processor.new(asset_root: '/assets')
 
   # GET /pages
   # GET /pages.json

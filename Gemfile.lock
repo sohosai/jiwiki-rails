@@ -115,6 +115,7 @@ GEM
       mini_portile (~> 0.6.0)
     nokogumbo (1.4.1)
       nokogiri
+    non-stupid-digest-assets (1.0.4)
     petname (0.0.1)
     pg (0.18.2)
     posix-spawn (0.3.11)
@@ -243,6 +244,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   less-rails
+  non-stupid-digest-assets
   petname
   pg
   pry-byebug
