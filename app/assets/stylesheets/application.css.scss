@@ -27,6 +27,12 @@ img {
   }
 }
 
+.btn {
+  .glyphicon {
+    margin-right: .4em;
+  }
+}
+
 form {
   .actions {
     margin: 1em 0;
@@ -63,5 +69,9 @@ form {
   img.emoji {
     width: 1em;
     height: 1em;
+  }
+
+  table {
+    @extend .table, .table-bordered, .table-condensed;
   }
 }

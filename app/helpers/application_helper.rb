@@ -15,6 +15,10 @@ module ApplicationHelper
     "/pages/#{page[:page_slug]}/"
   end
 
+  def page_versions_path(page)
+    "/pages/#{page[:page_slug]}/versions"
+  end
+
   def version_path(version)
     "/pages/#{version.page[:page_slug]}/versions/#{version[:id]}"
   end
@@ -26,6 +30,14 @@ module ApplicationHelper
     "".html_safe
   end
 
+  def tags_path
+    "/tags"
+  end
+
+  def show_tag_path(tag)
+    "/tags/#{tag}"
+  end
+
   def full_title(page_title)
     if page_title.empty?
       "JiWiki"
@@ -35,6 +47,6 @@ module ApplicationHelper
   end
 
   def full_time_ago(time)
-    "#{time_ago_in_words time} ago (#{time.in_time_zone.strftime "%Y-%m-%d %H:%M:%S"})"
+    "#{time_ago_in_words time} ago (#{time.in_time_zone.strftime "%Y-%m-%d %a %H:%M:%S"})"
   end
 end

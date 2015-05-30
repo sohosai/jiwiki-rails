@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+do -> (
+  document.getElementById("search_sort_order").addEventListener("change", ((e) ->
+    raw_url = decodeURI location.href
+    order_param = /search\[sort_order\]=[a-z_]+/
+    console.log raw_url
+    console.log e
+    if raw_url.match order_param
+      location.href = encodeURI(raw_url.replace(order_param, "search[sort_order]=" + this.value))
+    else
+      location.href = encodeURI(raw_url + "&search[sort_order]=" + this.value)
+  ))
+)

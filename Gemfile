@@ -30,10 +30,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'pg'
+gem 'ridgepole'
 
-gem 'mongoid', '~> 4.0.0'
-gem 'mongoid_search'
+gem 'acts-as-taggable-on'
+
+gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'slim-rails'
 gem 'less-rails'
@@ -58,4 +60,3 @@ group :development, :test do
   # generate random words
   gem 'petname'
 end
-

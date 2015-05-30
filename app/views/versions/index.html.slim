@@ -1,0 +1,15 @@
+- provide :title, "History of #{@page.title}"
+
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li = link_to @page.title, @page
+  li.active History (#{page_entries_info @versions})
+
+= paginate @versions, theme: 'twitter-bootstrap-3'
+
+- @versions.each do |ver|
+  .panel.panel-default
+    .panel-heading = link_to full_time_ago(ver.created_at), ver
+    .panel-body.markdown-body == PagesController.rendor_mkd ver[:body]
+
+= paginate @versions, theme: 'twitter-bootstrap-3'

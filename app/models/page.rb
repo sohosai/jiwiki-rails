@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
-class Page
-  include Mongoid::Document
-  include Mongoid::Timestamps::Updated
-
-  field :page_slug, type: String
-  field :title, type: String
-  field :is_deleted, type: Mongoid::Boolean
-  field :tags, type: Array, default: []
-
+class Page < ActiveRecord::Base
   has_many :versions, autosave: true
 
   validates :page_slug, uniqueness: true, format: { with: /\A[^\/\?\s\+=]+\z/ }
@@ -15,6 +7,8 @@ class Page
 
   # virtual attribute to handle pages#create: content of page's initial version
   attr_accessor :body
+
+  acts_as_taggable
 
   def last_edited_at
     versions.last.created_at
@@ -26,9 +20,9 @@ class Page
 
   def tags=(tag)
     if tag.is_a? String
-      super(Page.split_tags(tag))
-    else
-      super(tag)
+      tag_list.add(*Page.split_tags(tag))
+    elsif !tag.empty?
+      tag_list.add(*tag)
     end
   end
 
@@ -45,13 +39,17 @@ class Page
       "<s>[link to #{slug}]</s>"
     end
 
-    def new_with_body(params)
-      new(
-        page_slug: params["page_slug"],
-        title: params["title"],
-        tags: params["tags"],
-        versions: [Version.create(body: params["body"], title: params["title"])]
-      )
+    def sort_order_to_query(sort_order)
+      case sort_order
+      when "title_ascending"
+        "pages.title ASC"
+      when "title_descending"
+        "pages.title DESC"
+      when "oldest_first"
+        "pages.created_at ASC"
+      else # when newest_first or default
+        "pages.created_at DESC"
+      end
     end
   end
 end

@@ -1,0 +1,39 @@
+.tags {
+  line-height: 3;
+
+  .label-tag {
+    display: inline-block;
+
+    a {
+      color: #fff;
+      font-size: 1.2em;
+      vertical-align: bottom;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .tags_count {
+      margin-left: .4em;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  .label-info {
+
+  }
+  .label-success {
+    font-size: 1.25em;
+  }
+  .label-warning {
+    font-size: 1.5em;
+  }
+  .label-danger {
+    font-size: 1.7em;
+  }
+}

@@ -4,25 +4,33 @@ ol.breadcrumb
   li = link_to "Home", root_path
   li.active Result for "#{@query[:keyword]}" (#{page_entries_info @results})
 
-= render 'form'
+.row
+  .col-sm-9
+    = paginate @results, theme: 'twitter-bootstrap-3'
+  .col-sm-3
+    .pull-right
+      .form-group
+        = label :search, "Sort order"
+        = select :search, :sort_order,
+          { "Newest first"       => :newest_first,
+            "Oldest first"       => :oldest_first,
+            "Title (Ascending)"  => :title_ascending,
+            "Title (descending)" => :title_descending },
+          { selected: (params.try(:[], "search").try(:[], "sort_order") || "newest_first").to_sym },
+          { class: "form-control" }
 
-= paginate @results, theme: 'twitter-bootstrap-3'
-
-- @results.each do |page|
+- @results.each do |res|
   .panel.panel-default
     .panel-heading
       .pull-right
-        p
-          em #{pluralize page[1].size, "version"} matched
+        p #{full_time_ago res.created_at}
       .text-left
-        h4 = link_to page[0].title, page[0]
-      - page[0].tags.each do |tag|
+        h4 = link_to res.page.title, res.page
+      - res.page.tag_list.each do |tag|
         span.label.label-default = tag
-    .panel-body
-      - page[1][0, 5].each_with_index do |ver, i|
-        .panel.panel-default
-          .panel-heading = link_to full_time_ago(ver.created_at), ver
-          - if i == 0
-            .panel-body == PagesController.rendor_mkd ver.first_n_lines(5)
+    .panel-body.markdown-body
+      == PagesController.rendor_mkd res.body
 
 = paginate @results, theme: 'twitter-bootstrap-3'
+
+== javascript_include_tag 'search'

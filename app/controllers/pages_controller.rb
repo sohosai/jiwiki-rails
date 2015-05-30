@@ -6,9 +6,8 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @table_view = (params["view"] == "table")
     @page = (params["page"])? params["page"] : 1
-    @pages = Page.desc(:updated_at).page @page
+    @pages = Page.order(updated_at: :desc).page(@page).includes(:versions).eager_load(:versions)
   end
 
   # GET /pages/1
@@ -28,14 +27,26 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new_with_body(params["page"])
-    respond_to do |format|
-      if @page.save
+    begin
+      ActiveRecord::Base.transaction do
+        @page = Page.new(
+          page_slug: params["page"]["page_slug"],
+          title: params["page"]["title"],
+          tags: params["page"]["tags"]
+        )
+        @page.save!
+        @version = Version.new(body: params["page"]["body"], page: @page)
+        @version.save!
+      end
+      respond_to do |format|
         format.html { redirect_to action: "show", slug: page_params[:page_slug] , notice: 'Page was successfully created.' }
         format.json { render :show, status: :created, location: @page }
-      else
+      end
+    rescue => @err
+      respond_to do |format|
+        @page.body = params["page"]["body"]
         format.html { render :new }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.json { render json: @err, status: :unprocessable_entity }
       end
     end
   end
@@ -67,6 +78,13 @@ class PagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def take_params(*param_keys)
+    overwrites = param_keys.extract_options!
+    param_keys = %w(search page sort_order) if param_keys.blank?
+    params.dup.extract!(*param_keys).update(overwrites)
+  end
+  helper_method :take_params
 
   def self.rendor_mkd(str)
     # preprocess embedded link between pages

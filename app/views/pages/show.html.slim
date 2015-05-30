@@ -11,24 +11,17 @@ ol.breadcrumb
   .panel-heading
     .pull-right
       .btn-group
-        = link_to "Edit", edit_page_path(@page), class: "btn btn-primary", "role" => "button"
-        = link_to "Edit tags and title", edit_page_meta_path(@page), class: "btn btn-default", "role" => "button"
-        = link_to "Jump to histories", "#histories", class: "btn btn-default"
+        = link_to edit_page_path(@page), class: "btn btn-primary", "role" => "button" do
+          span.glyphicon.glyphicon-pencil
+          | Update
+        = link_to edit_page_meta_path(@page), class: "btn btn-default", "role" => "button" do
+          span.glyphicon.glyphicon-cog
+          | Edit
+        = link_to page_versions_path(@page), class: "btn btn-default" do
+          span.glyphicon.glyphicon-th-list
+          | History
+          .badge = @page.versions.size
     h2 = @page.title
     - @page.tags.each do |tag|
       span.label.label-default = tag
   .panel-body.markdown-body == PagesController.rendor_mkd @page.versions.last[:body]
-.panel.panel-default
-  .panel-heading#histories Histories
-  table.table.table-striped
-    thead
-      tr
-        th #
-        th at
-        th body
-    tbody
-      - @page.versions.each_with_index do |version, i|
-        tr
-          td = i+1
-          td = full_time_ago version[:created_at]
-          td = link_to version.first_n_lines(2), version
