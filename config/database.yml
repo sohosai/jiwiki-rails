@@ -55,4 +55,4 @@ production:
   <<: *default
   database: jiwiki_production
   username: jiwiki
-  password: <%= ENV['OPENTIE-MOCK_DATABASE_PASSWORD'] %>
+  password: <%= ENV['JIWIKI_DATABASE_PASSWORD'] %>
