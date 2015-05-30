@@ -7,6 +7,10 @@ ol.breadcrumb
 - if params[:notice]
   #notice.alert.alert-info = params[:notice]
 
+- unless @page.deleted_at.nil?
+  .alert.alert-warning
+    | This page was archived at #{full_time_ago @page.deleted_at}
+
 .panel.panel-default
   .panel-heading
     .pull-right
@@ -22,6 +26,6 @@ ol.breadcrumb
           | History
           .badge = @page.versions.size
     h2 = @page.title
-    - @page.tags.each do |tag|
+    - @page.tag_list.each do |tag|
       span.label.label-default = tag
   .panel-body.markdown-body == PagesController.rendor_mkd @page.versions.last[:body]

@@ -5,10 +5,15 @@ ol.breadcrumb
   li = link_to @version.page.title, show_page_path(@version.page)
   li.active #{(@version.find_index + 1).ordinalize} of #{@version.page.versions.length} @ #{full_time_ago @version.created_at}
 
+- unless @version.page.deleted_at.nil?
+  .alert.alert-warning
+    | This page was archived at #{full_time_ago @version.page.deleted_at}
+
+
 .panel.panel-default
   .panel-heading
     h2 = @version.page.title
-    - @version.page.tags.each do |tag|
+    - @version.page.tag_list.each do |tag|
       span.label.label-default = tag
 
   .panel-body.markdown-body == PagesController.rendor_mkd @version[:body]

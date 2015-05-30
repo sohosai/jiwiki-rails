@@ -1,9 +1,15 @@
 - provide :title, "Editing #{@page.title}"
 
+
 ol.breadcrumb
   li = link_to "Home", root_path
-  li = link_to @page.title, @page
-  li.active Edit
+  li.active l pages (#{page_entries_info @pages})
+
+ol.breadcrumb
+  li = link_to "Home", root_path
+  li.active = @page.title
+
+
 
 = form_for @page, url: page_update_path(@page) do |f|
   - if @page.errors.any?
