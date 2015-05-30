@@ -7,9 +7,9 @@ class PagesController < ApplicationController
   # GET /pages.json
   def index
     if params[:archived]
-      @pages = Page.deleted.order(updated_at: :desc).page(params[:page]).includes(:versions).eager_load(:versions)
+      @pages = Page.deleted.order(updated_at: :desc).page(params[:page]).preload(:versions)
     else
-      @pages = Page.not_deleted.order(updated_at: :desc).page(params[:page]).includes(:versions).eager_load(:versions)
+      @pages = Page.not_deleted.order(updated_at: :desc).page(params[:page]).preload(:versions)
     end
   end
 

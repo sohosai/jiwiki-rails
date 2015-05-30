@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class Page < ActiveRecord::Base
-  has_many :versions, autosave: true
+  has_many :versions, ->{ order(created_at: :desc) }, autosave: true
 
   validates :page_slug, uniqueness: true, format: { with: /\A[^\/\?\s\+=]+\z/ }
   validates_presence_of :title
@@ -14,7 +14,7 @@ class Page < ActiveRecord::Base
   scope :deleted, ->() { where.not(deleted_at: nil) }
 
   def last_edited_at
-    versions.last.created_at
+    versions.first.created_at
   end
 
   def to_param

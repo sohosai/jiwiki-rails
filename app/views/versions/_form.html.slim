@@ -10,7 +10,7 @@
     = f.label :body
     .row
       .col-sm-6
-        = f.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: @version.page.versions.last[:body], rows: 20
+        = f.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: @version.page.versions.first[:body], rows: 20
       .col-sm-6
         .panel.panel-default
           .panel-heading

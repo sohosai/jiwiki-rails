@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     else
       @query = params[:search]
       @sort_order = sort_order_to_query @query[:sort_order]
-      @results = Version.order(@sort_order).latests.full_text_search(@query[:keyword]).includes(:page).eager_load(:page).merge(Page.not_deleted).page params[:page]
+      @results = Version.order(@sort_order).latests.full_text_search(@query[:keyword]).preload(:page).merge(Page.not_deleted).page(params[:page])
     end
   end
 

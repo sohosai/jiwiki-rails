@@ -4,7 +4,7 @@ ol.breadcrumb
 - begin
   - page = Page.find_by page_slug: 'home'
   .panel.panel-default
-    .panel-body.markdown-body == PagesController.rendor_mkd page.versions.last.body
+    .panel-body.markdown-body == PagesController.rendor_mkd page.versions.first.body
     .panel-footer
       = link_to "Show this page (#{page.title})", show_page_path(page)
 - rescue
