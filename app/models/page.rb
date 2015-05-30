@@ -23,9 +23,9 @@ class Page < ActiveRecord::Base
 
   def tags=(tag)
     if tag.is_a? String
-      tag_list.add(*Page.split_tags(tag))
+      tag_list = *Page.split_tags(tag)
     elsif !tag.empty?
-      tag_list.add(*tag)
+      tag_list = *tag
     end
   end
 
