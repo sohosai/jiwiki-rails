@@ -10,6 +10,9 @@ class Page < ActiveRecord::Base
 
   acts_as_taggable
 
+  scope :not_deleted, ->() { where(deleted_at: nil) }
+  scope :deleted, ->() { where.not(deleted_at: nil) }
+
   def last_edited_at
     versions.last.created_at
   end
@@ -37,19 +40,6 @@ class Page < ActiveRecord::Base
       "[#{page.title}](/pages/#{slug})"
     rescue
       "<s>[link to #{slug}]</s>"
-    end
-
-    def sort_order_to_query(sort_order)
-      case sort_order
-      when "title_ascending"
-        "pages.title ASC"
-      when "title_descending"
-        "pages.title DESC"
-      when "oldest_first"
-        "pages.created_at ASC"
-      else # when newest_first or default
-        "pages.created_at DESC"
-      end
     end
   end
 end

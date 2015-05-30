@@ -6,8 +6,11 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @page = (params["page"])? params["page"] : 1
-    @pages = Page.order(updated_at: :desc).page(@page).includes(:versions).eager_load(:versions)
+    if params[:archived]
+      @pages = Page.deleted.order(updated_at: :desc).page(params[:page]).includes(:versions).eager_load(:versions)
+    else
+      @pages = Page.not_deleted.order(updated_at: :desc).page(params[:page]).includes(:versions).eager_load(:versions)
+    end
   end
 
   # GET /pages/1
@@ -72,9 +75,9 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
-    @page.destroy
+    @page.update_attribute(:deleted_at, Time.now)
     respond_to do |format|
-      format.html { redirect_to pages_path, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to @page, notice: 'Page was successfully archived.' }
       format.json { head :no_content }
     end
   end

@@ -6,7 +6,6 @@ ol.breadcrumb
 
 = paginate @pages, theme: 'twitter-bootstrap-3'
 
-
 - @pages.each do |page|
   .panel.panel-default
     .panel-heading
@@ -14,7 +13,7 @@ ol.breadcrumb
         p #{pluralize page.versions.count, "version"}, #{full_time_ago page.last_edited_at}
       .text-left
         h4 = link_to page.title, show_page_path(page)
-      - page.tags.each do |tag|
+      - page.tag_list.each do |tag|
         span.label.label-default = tag
     .panel-body.markdown-body == PagesController.rendor_mkd page.versions.first.first_n_lines(5)
 
