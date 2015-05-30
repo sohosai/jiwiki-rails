@@ -21,14 +21,6 @@ class Page < ActiveRecord::Base
     self[:page_slug]
   end
 
-  def tags=(tag)
-    if tag.is_a? String
-      tag_list = *Page.split_tags(tag)
-    elsif !tag.empty?
-      tag_list = *tag
-    end
-  end
-
   class << self
     def split_tags(str)
       str.split(/,|、/).map {|s| s.gsub(/^\p{blank}*/, '').gsub(/\p{blank}*$/, '') }.compact
