@@ -3,6 +3,10 @@ module ApplicationHelper
     "/pages/#{page[:page_slug]}"
   end
 
+  def fork_page_path(page)
+    "/pages/new?forked_from=#{page.versions.first.id}"
+  end
+
   def edit_page_path(page)
     "/pages/#{page[:page_slug]}/versions/new"
   end

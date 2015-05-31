@@ -21,6 +21,9 @@ ol.breadcrumb
         = link_to edit_page_meta_path(@page), class: "btn btn-default", "role" => "button" do
           span.glyphicon.glyphicon-cog
           | Edit
+        = link_to fork_page_path(@page), class: "btn btn-info", "role" => "button" do
+          span.glyphicon.glyphicon-duplicate
+          | Fork
         = link_to page_versions_path(@page), class: "btn btn-default" do
           span.glyphicon.glyphicon-th-list
           | History
