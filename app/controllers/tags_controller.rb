@@ -4,7 +4,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = ActsAsTaggableOn::Tag.all
+    @tags = ActsAsTaggableOn::Tag.where('taggings_count > ?', 0)
   end
 
   # GET /tags/1
@@ -21,7 +21,7 @@ class TagsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_tag
     @tag = params[:tag]
-    @pages_with_tag = Page.tagged_with(@tag)
+    @pages_with_tag = Page.tagged_with(@tag).order('pages.updated_at DESC')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
