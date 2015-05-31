@@ -20,7 +20,9 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @page = Page.new
+    version = Version.find_by(id: params[:forked_from])
+    @initial_body = version.try(:body) || ''
+    @page = Page.new()
   end
 
   # GET /pages/1/edit
