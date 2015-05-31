@@ -35,7 +35,7 @@ class PagesController < ApplicationController
         @page = Page.new(
           page_slug: params["page"]["page_slug"],
           title: params["page"]["title"],
-          tags: params["page"]["tags"]
+          tag_list: params["page"]["tags"]
         )
         @page.save!
         @version = Version.new(body: params["page"]["body"], page: @page)
