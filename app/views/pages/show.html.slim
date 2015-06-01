@@ -2,7 +2,7 @@
 
 ol.breadcrumb
   li = link_to "Home", root_path
-  li.active = @page.title
+  li.active #{@page.title} (latest @ #{full_time_ago @page.versions.first.created_at})
 
 - if params[:notice]
   #notice.alert.alert-info = params[:notice]
@@ -14,7 +14,7 @@ ol.breadcrumb
 .panel.panel-default
   .panel-heading
     .pull-right
-      .btn-group
+      .btn-group.no-print
         = link_to edit_page_path(@page), class: "btn btn-primary", "role" => "button" do
           span.glyphicon.glyphicon-pencil
           | Update

@@ -17,13 +17,20 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
 img {
   max-width: 100%;
 }
 
 .panel-heading {
   .label {
-    margin-right: .4em;
+    margin-right: .6em;
+    margin-left: 0;
   }
 }
 
