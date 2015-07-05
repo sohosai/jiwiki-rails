@@ -15,6 +15,6 @@ ol.breadcrumb
     .tags
       - @version.page.tag_list.each do |tag|
         span.label.label-default
-          = link_to tag
+          = link_to tag, show_tag_path(tag)
 
   .panel-body.markdown-body == PagesController.rendor_mkd @version[:body]

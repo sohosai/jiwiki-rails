@@ -17,7 +17,7 @@ ol.breadcrumb
       .tags
         - page.tags.each do |tag|
           span.label.label-default
-            = link_to tag
+            = link_to tag, show_tag_path(tag)
     .panel-body.markdown-body == PagesController.rendor_mkd page.versions.first.first_n_lines(5)
 
 = paginate @pages, theme: 'twitter-bootstrap-3'
