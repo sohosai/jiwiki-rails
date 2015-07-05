@@ -4,7 +4,7 @@ ol.breadcrumb
   li = link_to "Home", root_path
   li.active All tags
 
-.tags
+.tags-list
   - tag_cloud(@tags, %w{label-info label-success label-warning label-danger}) do |tag, css_class|
     span class="tag label label-tag #{css_class}" = link_to show_tag_path(tag.name) do
       = tag.name

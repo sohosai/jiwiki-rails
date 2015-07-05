@@ -44,23 +44,12 @@ $fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  .fa-link {
-    font-size: 14px;
-    vertical-align: top;
-
-  }
-}
-
 .badge, .label {
   &:not(:first-child) {
     margin-right: 0.4em;
   }
 }
 
-img {
-  max-width: 100%;
-}
 
 .btn {
   .glyphicon {
@@ -81,29 +70,41 @@ form {
   }
 }
 
-.markdown-body {
-  h1 {
-    font-size: 24px;
-    line-height: 1.4em;
-    border-bottom: 2px solid #e8e8e8;
-  }
-  h2 {
-    font-size: 22px;
-    line-height: 1.4em;
-    border-bottom: 1px solid #ccc;
-  }
-  h3 {
-    font-size: 20px;
-    line-height: 1.4em;
-    border-bottom: 1px solid #e8e8e8;
+.page-view {
+  .tags {
+    a {
+      color: white;
+    }
   }
 
-  img.emoji {
-    width: 1em;
-    height: 1em;
-  }
+  .markdown-body {
+    h1 {
+      font-size: 24px;
+      line-height: 1.4em;
+      border-bottom: 2px solid #e8e8e8;
+    }
+    h2 {
+      font-size: 22px;
+      line-height: 1.4em;
+      border-bottom: 1px solid #ccc;
+    }
+    h3 {
+      font-size: 20px;
+      line-height: 1.4em;
+      border-bottom: 1px solid #e8e8e8;
+    }
 
-  table {
-    @extend .table, .table-bordered, .table-condensed;
+    img {
+      max-width: 100%;
+
+      &.emoji {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    table {
+      @extend .table, .table-bordered, .table-condensed;
+    }
   }
 }

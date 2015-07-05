@@ -9,11 +9,12 @@ ol.breadcrumb
   .alert.alert-warning
     | This page was archived at #{full_time_ago @version.page.deleted_at}
 
-
-.panel.panel-default
+.panel.panel-default.page-view
   .panel-heading
     h2 = @version.page.title
-    - @version.page.tag_list.each do |tag|
-      span.label.label-default = tag
+    .tags
+      - @version.page.tag_list.each do |tag|
+        span.label.label-default
+          = link_to tag
 
   .panel-body.markdown-body == PagesController.rendor_mkd @version[:body]
