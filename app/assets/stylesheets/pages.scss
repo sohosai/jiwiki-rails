@@ -2,8 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.pull-right .btn {
-    margin-left: .5em;
+.pull-right {
+  .btn-group {
+    @media (max-width: 768px) {
+
+    }
+
+
+    .btn {
+      margin-left: .5em;
+    }
+  }
 }
 
 .panel-heading h2 {

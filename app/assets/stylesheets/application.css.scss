@@ -14,8 +14,29 @@
  *= require_self
  */
 
+// variables to override
+$navbar-default-color: rgb(181, 55, 0);
+$navbar-default-bg: #FFE7CB;
+$navbar-default-link-color: rgb(181, 55, 0);
+$navbar-default-link-hover-color: darken($navbar-default-link-color, 15%);
+$navbar-default-toggle-hover-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-toggle-icon-bar-bg: darken($navbar-default-bg, 30%);
+$navbar-default-toggle-border-color: darken($navbar-default-bg, 20%);
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+// Set the correct sprite paths
+$iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+$iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+$fontAwesomeEotPath: font-url("fontawesome-webfont.eot");
+$fontAwesomeEotPath_iefix: font-url("fontawesome-webfont.eot?#iefix");
+$fontAwesomeWoffPath: font-url("fontawesome-webfont.woff");
+$fontAwesomeTtfPath: font-url("fontawesome-webfont.ttf");
+$fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
+
 
 @media print {
   .no-print {
@@ -23,15 +44,22 @@
   }
 }
 
-img {
-  max-width: 100%;
+h1, h2, h3, h4, h5, h6 {
+  .fa-link {
+    font-size: 14px;
+    vertical-align: top;
+
+  }
 }
 
-.panel-heading {
-  .label {
-    margin-right: .6em;
-    margin-left: 0;
+.badge, .label {
+  &:not(:first-child) {
+    margin-right: 0.4em;
   }
+}
+
+img {
+  max-width: 100%;
 }
 
 .btn {
@@ -48,10 +76,7 @@ form {
     margin: .6em 0;
   }
   .markdown-input {
-    font-family: monospace;
-  }
-
-  textarea {
+    font-family: Ricty, Consolas, Menlo, "Hiragino Kaku Gothic Pro", Meiryo, monospace;
     resize: vertical;
   }
 }
