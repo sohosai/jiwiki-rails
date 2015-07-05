@@ -39,7 +39,6 @@ gem 'acts-as-taggable-on'
 gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'slim-rails'
-gem 'less-rails'
 
 gem 'qiita-markdown'
 
