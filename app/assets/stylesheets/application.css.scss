@@ -46,7 +46,7 @@ $fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
 
 .badge, .label {
   &:not(:first-child) {
-    margin-right: 0.4em;
+    margin-left: 0.4em;
   }
 }
 
