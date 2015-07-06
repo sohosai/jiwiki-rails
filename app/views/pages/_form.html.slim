@@ -21,7 +21,7 @@
       .col-sm-6
         = f.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: (@page.body || @page.versions.first.try(:body) || @initial_body), rows: 20
       .col-sm-6
-        .panel.panel-default
+        .panel.panel-default.page-view
           .panel-heading
             | Preview
             .pull-right
