@@ -20,18 +20,7 @@ ol.breadcrumb
           { class: "form-control" }
 
 - @results.each do |res|
-  .panel.panel-default.page-view
-    .panel-heading
-      .pull-right
-        p #{full_time_ago res.created_at}
-      .text-left
-        h4 = link_to res.page.title, res.page
-      .tags
-        - res.page.tag_list.each do |tag|
-          span.label.label-default
-            = link_to tag, show_tag_path(tag)
-    .panel-body.markdown-body
-      == PagesController.rendor_mkd res.body
+  = render partial: "pages/panel_list_view", locals: { page: res.page, body: res.first_n_lines(10) }
 
 = paginate @results, theme: 'twitter-bootstrap-3'
 

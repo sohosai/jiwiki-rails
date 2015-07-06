@@ -15,21 +15,7 @@
   .field.form-group
     = f.label :tags
     = f.text_field :tags, class: "form-control", value: @page.tags.try(:join, ", "), placeholder: "tags, in, comma, separated"
-  .field.form-group
-    = f.label :body
-    .row
-      .col-sm-6
-        = f.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: (@page.body || @page.versions.first.try(:body) || @initial_body), rows: 20
-      .col-sm-6
-        .panel.panel-default.page-view
-          .panel-heading
-            | Preview
-            .pull-right
-              label.checkbox-inline
-                input#form-pages-new-autoupdate type="checkbox" checked="checked" Auto Update
-              #form-pages-new-manualupdate.btn.btn-info.btn-xs Update
-          #form-pages-new-body-preview.panel-body.markdown-body
-            h3 Preview will appear here
+  = render partial: "pages/form_body", locals: { initial_value: (@page.body || @page.versions.first.try(:body) || @initial_body), form: f }
   .actions = f.submit class: "btn btn-primary", id: "form-pages-new-submit"
 
 == javascript_include_tag 'pages/new'

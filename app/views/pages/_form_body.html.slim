@@ -1,0 +1,15 @@
+.field.form-group
+  = form.label :body
+  .row
+    .col-sm-6
+      = form.text_area :body, class: "form-control markdown-input", id: "form-pages-new-body", value: initial_value, rows: 20
+    .col-sm-6
+      .panel.panel-default.page-view
+        .panel-heading
+          | Preview
+          .pull-right
+            label.checkbox-inline
+              input#form-pages-new-autoupdate type="checkbox" checked="checked" Auto Update
+            #form-pages-new-manualupdate.btn.btn-info.btn-xs Update
+        #form-pages-new-body-preview.panel-body.markdown-body
+          h3 Preview will appear here

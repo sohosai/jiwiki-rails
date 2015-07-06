@@ -1,0 +1,11 @@
+.panel.panel-default.page-view
+  .panel-heading
+    .pull-right
+      p #{pluralize page.versions.count, "version"}, #{full_time_ago page.last_edited_at}
+    .text-left
+      h4 = link_to page.title, show_page_path(page)
+    .tags
+      - page.tag_list.each do |tag|
+        span.label.label-default
+          = link_to tag, show_tag_path(tag)
+  .panel-body.markdown-body == PagesController.rendor_mkd body
