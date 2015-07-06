@@ -1,7 +1,7 @@
 .panel.panel-default.page-view
   .panel-heading
     .pull-right
-      p #{pluralize page.versions.count, "version"}, #{full_time_ago page.last_edited_at}
+      p #{pluralize page.versions.count, "version"}, #{full_time_ago page.updated_at}
     .text-left
       h4 = link_to page.title, show_page_path(page)
     .tags
