@@ -94,6 +94,12 @@ form {
       border-bottom: 1px solid #e8e8e8;
     }
 
+    h1, h2, h3, h4 {
+      &:nth-child(1) {
+        margin-top: 0;
+      }
+    }
+
     img {
       max-width: 100%;
 
