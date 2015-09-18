@@ -12,6 +12,7 @@
     - if snip
       == PagesController.rendor_mkd body.split(/\r?\n/)[0,5].join("\n")
       small
-        mark = "(#{body.split(/\r?\n/).size} lines in total)"
+        mark
+          = link_to "(#{body.split(/\r?\n/).size} lines in total)", show_page_path(page)
     - else
       == PagesController.rendor_mkd body
