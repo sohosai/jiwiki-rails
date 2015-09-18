@@ -8,6 +8,6 @@ ol.breadcrumb
 = paginate @pages, theme: 'twitter-bootstrap-3'
 
 - @pages.each do |page|
-  = render partial: "pages/panel_list_view", locals: { page: page, body: page.versions.first, snip: true }
+  = render partial: "pages/panel_list_view", locals: { page: page, body: page.versions.first.body, snip: true }
 
 = paginate @pages, theme: 'twitter-bootstrap-3'
