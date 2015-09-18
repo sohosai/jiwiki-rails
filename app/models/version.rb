@@ -13,10 +13,6 @@ class Version < ActiveRecord::Base
   scope :full_text_search, ->(query) { where("body @@ ?", query) }
   scope :latests, -> () { where("versions.created_at = (SELECT max(created_at) FROM versions i WHERE i.page_id = versions.page_id)") }
 
-  def first_n_lines(n)
-    body.split(/\r?\n/)[0,n].join("\n")
-  end
-
   def find_index
     page.versions.find_index(self)
   end

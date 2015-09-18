@@ -8,4 +8,10 @@
       - page.tag_list.each do |tag|
         span.label.label-default
           = link_to tag, show_tag_path(tag)
-  .panel-body.markdown-body == PagesController.rendor_mkd body
+  .panel-body.markdown-body
+    - if snip
+      == PagesController.rendor_mkd body.split(/\r?\n/)[0,5].join("\n")
+      small
+        mark = "(#{body.split(/\r?\n/).size} lines in total)"
+    - else
+      == PagesController.rendor_mkd body
