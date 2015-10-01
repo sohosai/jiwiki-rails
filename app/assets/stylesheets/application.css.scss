@@ -76,41 +76,41 @@ form {
       color: white;
     }
   }
+}
 
-  .markdown-body {
-    h1 {
-      font-size: 24px;
-      line-height: 1.4em;
-      border-bottom: 2px solid #e8e8e8;
-    }
-    h2 {
-      font-size: 22px;
-      line-height: 1.4em;
-      border-bottom: 1px solid #ccc;
-    }
-    h3 {
-      font-size: 20px;
-      line-height: 1.4em;
-      border-bottom: 1px solid #e8e8e8;
-    }
+.markdown-body {
+  h1 {
+    font-size: 24px;
+    line-height: 1.4em;
+    border-bottom: 2px solid #e8e8e8;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.4em;
+    border-bottom: 1px solid #ccc;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 1.4em;
+    border-bottom: 1px solid #e8e8e8;
+  }
 
-    h1, h2, h3, h4 {
-      &:nth-child(1) {
-        margin-top: 0;
-      }
+  h1, h2, h3, h4 {
+    &:nth-child(1) {
+      margin-top: 0;
     }
+  }
 
-    img {
-      max-width: 100%;
+  img {
+    max-width: 100%;
 
-      &.emoji {
-        width: 1em;
-        height: 1em;
-      }
+    &.emoji {
+      width: 1em;
+      height: 1em;
     }
+  }
 
-    table {
-      @extend .table, .table-bordered, .table-condensed;
-    }
+  table {
+    @extend .table, .table-bordered, .table-condensed;
   }
 }
